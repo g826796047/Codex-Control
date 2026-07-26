@@ -1,0 +1,38 @@
+{
+  "name": "codex-control",
+  "version": "0.1.4",
+  "private": true,
+  "description": "Remote mobile control bridge for local Codex tasks.",
+  "license": "MIT",
+  "author": "g826796047",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/g826796047/Codex-Control.git"
+  },
+  "bugs": {
+    "url": "https://github.com/g826796047/Codex-Control/issues"
+  },
+  "homepage": "https://github.com/g826796047/Codex-Control#readme",
+  "keywords": [
+    "codex",
+    "electron",
+    "pwa",
+    "remote-control",
+    "fastify"
+  ],
+  "packageManager": "pnpm@11.9.0",
+  "scripts": {
+    "dev": "pnpm build && concurrently -k -n web,desktop -c cyan,green \"pnpm --filter @codex-control/web dev\" \"pnpm --filter @codex-control/desktop dev\"",
+    "build": "pnpm --filter @codex-control/shared build && pnpm --filter @codex-control/web build && pnpm --filter @codex-control/server build && pnpm --filter @codex-control/desktop build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm --filter @codex-control/server test",
+    "test:e2e": "playwright test",
+    "electron:install": "pnpm --filter @codex-control/desktop exec install-electron",
+    "package:win": "pnpm build && pnpm --filter @codex-control/desktop package:win"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.0",
+    "concurrently": "9.2.1",
+    "typescript": "7.0.2"
+  }
+}

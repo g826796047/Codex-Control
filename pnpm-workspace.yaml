@@ -1,0 +1,8 @@
+packages:
+  - apps/*
+  - packages/*
+allowBuilds:
+  electron-winstaller: true
+  esbuild: true
+minimumReleaseAgeExclude:
+  - lucide-react@1.27.0

@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "composite": true,
+    "types": ["node", "electron"]
+  },
+  "references": [{ "path": "../server" }],
+  "include": ["src/**/*.ts"]
+}
+

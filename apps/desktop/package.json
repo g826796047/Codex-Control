@@ -1,0 +1,60 @@
+{
+  "name": "@codex-control/desktop",
+  "version": "0.1.4",
+  "private": true,
+  "description": "Windows tray companion for Codex Control.",
+  "license": "MIT",
+  "author": "g826796047",
+  "type": "module",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "pnpm build && electron .",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "package:win": "electron-builder --win nsis --x64"
+  },
+  "dependencies": {
+    "@codex-control/server": "workspace:*",
+    "qrcode": "1.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "@types/qrcode": "1.5.6",
+    "electron": "43.2.0",
+    "electron-builder": "26.15.3",
+    "typescript": "7.0.2"
+  },
+  "build": {
+    "appId": "dev.codex-control.desktop",
+    "productName": "Codex Control",
+    "asar": true,
+    "directories": {
+      "output": "../../release"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../web/dist",
+        "to": "web"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": false,
+      "createStartMenuShortcut": true,
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}

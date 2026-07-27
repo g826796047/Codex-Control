@@ -28,7 +28,7 @@
   "scripts": {
     "dev": "pnpm build && concurrently -k -n web,desktop -c cyan,green \"pnpm --filter @codex-control/web dev\" \"pnpm --filter @codex-control/desktop dev\"",
     "build": "pnpm --filter @codex-control/shared build && pnpm --filter @codex-control/web build && pnpm --filter @codex-control/server build && pnpm --filter @codex-control/desktop build",
-    "typecheck": "pnpm -r typecheck",
+    "typecheck": "pnpm --filter @codex-control/shared build && pnpm -r typecheck",
     "test": "pnpm --filter @codex-control/server test",
     "test:e2e": "playwright test",
     "electron:install": "pnpm --filter @codex-control/desktop exec install-electron",

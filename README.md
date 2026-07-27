@@ -1,6 +1,65 @@
 # Codex Control
 
-Codex Control 是一个 Windows 托盘应用和手机 PWA。它通过本机 Codex `app-server` 控制项目、会话、模型、推理强度、实时消息、审批和任务停止，并支持 Sakura FRP 或 Cloudflare Named Tunnel 提供仅浏览器访问的 HTTPS 地址。
+## 项目简介
+
+Codex Control 是一个 Windows 托盘应用和手机 PWA，让你从手机安全地访问并控制本机 Codex：切换项目和会话、创建对话、选择模型与推理强度、查看实时回复、处理审批，以及停止任务。它通过 Sakura FRP 或 Cloudflare Named Tunnel 将本机服务以 HTTPS 暴露给已配对的个人设备。
+
+碎碎念：鄙人使用的鸿蒙系统让我在使用手机控codex的路途上吃尽了苦头，chatgpt手机app无法下载、市面流传的app要不收费要不功能不全（很多都无法切换会话模型，或者无法同步桌面任务历史会话），由此催生了此项目。同时感谢伟大的AI时代让我不到一上午就能完成这个项目。
+
+如有Bug欢迎提issue，看到会尽快修复（如果有能力）
+
+## 打赏
+
+如果这个项目帮你节省了时间，欢迎微信打赏，用以弥补本社畜构建和后续维护耗费的token。
+
+<p align="center">
+  <img src="docs/assets/donate-wechat.jpg" alt="微信赞赏码" width="280">
+</p>
+
+## 端到端使用
+
+### 1. 安装并启动
+
+1. 从 [GitHub Releases](https://github.com/g826796047/Codex-Control/releases) 下载最新的 Windows x64 安装包并完成安装。
+2. 从开始菜单启动 **Codex Control**；它会以托盘程序方式运行。
+3. 首次启动时，应用会校验本机 Codex CLI；不存在时会下载固定版本。请保持网络可用，并使用自己的 Codex 账号完成登录。
+
+Windows 安装包暂未代码签名，SmartScreen 可能显示“未知发布者”提示。请仅从本仓库 Release 下载。
+
+### 2. 配置手机访问地址
+
+应用本地服务仅监听 `127.0.0.1:4689`。请选择一种方式提供自己的 HTTPS 公网地址：
+
+**Sakura FRP**
+
+1. 在 Sakura FRP 创建 HTTPS 隧道，将公网地址转发到 `127.0.0.1:4689`。
+2. 在托盘菜单中选择“配置公网访问”，选择“Sakura FRP”。
+3. 填写完整的 HTTPS 公网地址并保存。
+
+**Cloudflare Named Tunnel**
+
+1. 在 Cloudflare Zero Trust 创建 Named Tunnel 和公开主机名。
+2. 将服务目标设置为 `http://127.0.0.1:4689`。
+3. 在托盘菜单中选择“配置 Cloudflare Tunnel”，填写 HTTPS 地址和 connector token。
+
+必须使用 HTTPS；纯 HTTP 无法满足设备 Cookie 的 `Secure` 要求。
+
+### 3. 配对手机
+
+1. 在 PC 托盘菜单点击“添加设备”。
+2. 用手机浏览器扫描二维码，或输入显示的 9 位一次性配对码。
+3. 配对成功后，手机会获得长期设备 Cookie；以后直接打开公网地址即可进入工作台。
+
+配对入口仅开放 5 分钟，配对码和二维码 URL 仅限本人使用。设备可随时在 PC 托盘中撤销。
+
+### 4. 在手机上控制 Codex
+
+1. 选择项目和会话，或创建新对话。
+2. 选择模型与推理强度，发送任务。
+3. 实时查看回复、命令输出和文件变更；需要时在页面上批准或拒绝审批请求。
+4. 使用停止按钮中断由网页发起的任务。
+
+桌面端正在运行的任务会在约 1–2 秒内以只读方式同步到手机。网页新建任务由独立 app-server 执行，因此不会实时显示在官方 Codex 桌面 UI 中。
 
 > [!WARNING]
 > 这是一个用于控制本机 Codex 的个人远程访问工具。请不要将配对码、设备 Cookie、Tunnel token、诊断导出文件或包含本机路径的日志发布到 Issue、截图或公开仓库。

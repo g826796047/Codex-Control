@@ -25,7 +25,7 @@ flowchart LR
 
 ## 开发
 
-环境要求：Windows x64、Node.js 22.12+、pnpm 11。
+环境要求：Windows x64、Node.js 22.13+、pnpm 11。
 
 ```powershell
 pnpm install

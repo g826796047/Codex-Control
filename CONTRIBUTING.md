@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - Windows x64
-- Node.js 22.12 or later
+- Node.js 22.13 or later
 - pnpm 11
 
 ## Local checks

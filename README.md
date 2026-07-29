@@ -8,13 +8,6 @@ Codex Control 是一个 Windows 托盘应用和手机 PWA，让你从手机安�
 
 如有Bug欢迎提issue，看到会尽快修复（如果有能力）
 
-## 打赏
-
-如果这个项目帮你节省了时间，欢迎微信打赏，用以弥补本社畜构建和后续维护耗费的token。
-
-<p align="center">
-  <img src="docs/assets/donate-wechat.jpg" alt="微信赞赏码" width="280">
-</p>
 
 ## 端到端使用
 
